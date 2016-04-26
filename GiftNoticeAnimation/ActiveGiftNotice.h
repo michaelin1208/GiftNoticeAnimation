@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *giftName;
 
-- (instancetype)initWithCell:(GiftNoticeCellView *)cell Sender:(NSString *)sender Gift:(NSString *)gift;
+- (instancetype)initWithSender:(NSString *)sender Gift:(NSString *)gift;
 - (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell;
     
 @end

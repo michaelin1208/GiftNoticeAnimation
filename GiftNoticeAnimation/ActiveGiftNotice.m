@@ -42,19 +42,16 @@
     int targetCount;
     long currentTimeInterval;
     Boolean isShown;
-    
-
-    
 }
 
-- (instancetype)initWithCell:(GiftNoticeCellView *)cell Sender:(NSString *)sender Gift:(NSString *)gift
+- (instancetype)initWithSender:(NSString *)sender Gift:(NSString *)gift
 {
     self = [super init];
     if (self) {
         currentCount = 0;
         targetCount = 0;
         currentTimeInterval = [[NSDate date] timeIntervalSince1970];
-        _allocatedCell = cell;
+//        _allocatedCell = cell;
         _senderName = sender;
         _giftName = gift;
     }

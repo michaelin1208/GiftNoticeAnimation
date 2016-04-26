@@ -39,6 +39,7 @@
     int currentCount;
     int targetCount;
     
+    int animationType;
     
     long currentTimeInterval;
     
@@ -50,7 +51,7 @@
     if (self) {
         
         firstStep = YES;
-        _isDisappear = NO;
+        _isDisappear = YES;
         _isUsable = YES;
         self.backgroundColor = [UIColor redColor];
         self.frame = CGRectMake(0, 0, kGiftNoticeCellViewWidth, kGiftNoticeCellViewHeight);
@@ -69,15 +70,14 @@
         [self addSubview:self.countLabel];
         
         self.countLabel.hidden = YES;
-//        self.countLabel.text = @"X60";
         
-//        self.layer.anchorPoint = CGPointMake(0, 0);
         count = 0;
         currentCount = 0;
         targetCount = 0;
         
         _senderName = @"";
         _giftName = @"";
+        
         
     }
     
@@ -149,29 +149,22 @@
     increaseAnimation.delegate = self;
 }
 
-//- (void)appearCellWithCount: (int)count Sender: (NSString *)name Gift:(NSString *)gift {
-//    
-//    //    currentTimeInterval = [[NSDate date] timeIntervalSince1970];
-//    
-//    self.giftSenderLabel.text = name;
-//    self.giftNameLabel.text = gift;
-//    
-//    [self appearAnimation];
-//    
-//}
-
 - (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)sender Gift:(NSString *)gift {
-    currentCount = cCount;
-    targetCount = tCount;
     
 //    currentTimeInterval = [[NSDate date] timeIntervalSince1970];
     if([sender isEqualToString:_senderName] && [gift isEqualToString:_giftName] && !_isDisappear){
-        NSLog(@"same same");
-        [self increaseAnimation];
+        if (_isUsable) {
+            currentCount = cCount;
+            targetCount = tCount;
+            [self increaseAnimation];
+        }else{
+            targetCount = tCount;
+        }
     }else{
         _senderName = sender;
         _giftName = gift;
-        NSLog(@"different different");
+        currentCount = cCount;
+        targetCount = tCount;
         self.giftSenderLabel.text = _senderName;
         self.giftNameLabel.text = _giftName;
         [self appearAnimation];
@@ -183,39 +176,50 @@
 
 - (void) animationDidStart:(CAAnimation *)anim
 {
-    _isUsable = NO;
     NSLog(@"animation start");
 }
 
-// 烟花的发射到固定点后 再调用爆炸的动画
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    if (firstStep){
-        _isUsable = YES;
-        NSLog(@"increaseAnimation");
-        [self increaseAnimation];
-        
-//        [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(disappearAnimation) userInfo:nil repeats:NO];
-        
-    }else{
-        if (_isDisappear){
+    switch (animationType) {
+        case 0:
+            //appearAnimation finished
             _isUsable = YES;
+            [self increaseAnimation];
+            break;
+        case 1:
+            //increaseAnimation finished
+            [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
+            break;
+        case 2:
+            //disappearAnimation finished
+            
             self.hidden = YES;
             self.countLabel.hidden = YES;
-            NSLog(@"MoveOutAnimation end");
-            firstStep = YES;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"CallNextNotice" object:[NSNumber numberWithInt:_cellID]];
-        }else{
+            _isUsable = YES;
             
-            [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
-        }
+            break;
+            
+        default:
+            break;
     }
 }
 
-- (void) increaseAnimation{
-    _isUsable = YES;
+- (void) appearAnimation{
+    _isUsable = NO;
+    animationType = 0;
     _isDisappear = NO;
+    self.hidden = NO;
+    self.countLabel.hidden = YES;
+    [self.layer addAnimation:appearAnimation forKey:@"appearAnimation"];
+    self.layer.position = stayPoint;
+    self.layer.opacity = 1.0;
+}
+
+- (void) increaseAnimation{
     if (currentCount < targetCount) {
+        _isUsable = NO;
+        animationType = 1;
         currentCount++;
         self.hidden = NO;
         self.countLabel.hidden = NO;
@@ -224,38 +228,19 @@
         [self.countLabel.layer addAnimation:increaseAnimation forKey:@"increaseAnimation"];
         firstStep = NO;
     }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"WantDisappearMyself" object:[NSNumber numberWithInt:_cellID]];
+        _isUsable = YES;
     }
-}
-
-- (void) appearAnimation{
-    _isDisappear = NO;
-    self.hidden = NO;
-    self.countLabel.hidden = YES;
-//    _isUsable = NO;
-    [self.layer addAnimation:appearAnimation forKey:@"appearAnimation"];
-    self.layer.position = stayPoint;
-    self.layer.opacity = 1.0;
 }
 
 - (void) disappearAnimation{
-    count --;
-    NSLog(@"count %d", count);
-    if (count == 0) {
-        _isDisappear = YES;
-//        _isUsable = NO;
-        [self.layer addAnimation:disappearAnimation forKey:@"disappearAnimation"];
-        self.layer.position = endPoint;
-        self.layer.opacity = 0.0;
-        firstStep = NO;
-    }
+    _isUsable = NO;
+    animationType = 2;
+    _isDisappear = YES;
+    [self.layer addAnimation:disappearAnimation forKey:@"disappearAnimation"];
+    self.layer.position = endPoint;
+    self.layer.opacity = 0.0;
 }
 
-- (void)startToDisappear{
-    count ++;
-    NSLog(@"count %d", count);
-    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(disappearAnimation) userInfo:nil repeats:NO];
-}
 
 
 @end
