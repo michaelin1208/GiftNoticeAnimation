@@ -12,12 +12,21 @@
 
 @property (strong, nonatomic) UILabel *giftSenderLabel;
 @property (strong, nonatomic) UILabel *giftNameLabel;
+@property (strong, nonatomic) UILabel *countLabel;
 
 @property (nonatomic) int cellID;
+@property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *giftName;
+
+
+@property (nonatomic) Boolean isUsable;
+@property (nonatomic) Boolean isDisappear;
 
 //+ (GiftNoticeCellView *)instanceGiftNoticeCellView;
 
-- (void)refreshCellWithSender:(NSString *)name Gift:(NSString *)gift;
 - (void)initAnimations;
+- (void)appearCellWithCount: (int)count Sender: (NSString *)name Gift:(NSString *)gift;
+- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)name Gift:(NSString *)gift;
+- (void)startToDisappear;
 
 @end

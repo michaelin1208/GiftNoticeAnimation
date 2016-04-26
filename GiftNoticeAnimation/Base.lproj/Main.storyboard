@@ -18,35 +18,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPW-ZD-XwE">
-                                <rect key="frame" x="520" y="322" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZA-qO-dxK">
+                                <rect key="frame" x="524" y="256" width="32" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="39" id="clv-Yl-kjt"/>
-                                    <constraint firstAttribute="height" constant="30" id="sin-n9-Y2m"/>
+                                    <constraint firstAttribute="height" constant="30" id="87t-eT-uJH"/>
+                                    <constraint firstAttribute="width" constant="32" id="zMx-4r-cyY"/>
                                 </constraints>
-                                <state key="normal" title="B Gift"/>
+                                <state key="normal" title="A G1"/>
                                 <connections>
-                                    <action selector="giftBBtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Snt-8O-SKB"/>
+                                    <action selector="giftAG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LhQ-Lh-ysE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZA-qO-dxK">
-                                <rect key="frame" x="520" y="256" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8q-Fq-26q">
+                                <rect key="frame" x="523" y="294" width="34" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3Xt-DV-fXD"/>
-                                    <constraint firstAttribute="width" constant="39" id="fNn-T6-TJh"/>
+                                    <constraint firstAttribute="width" constant="34" id="5B3-k4-Z2O"/>
+                                    <constraint firstAttribute="height" constant="30" id="OdB-h6-JKe"/>
                                 </constraints>
-                                <state key="normal" title="A Gift"/>
+                                <state key="normal" title="A G2"/>
                                 <connections>
-                                    <action selector="giftABtnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lgH-Bd-cfW"/>
+                                    <action selector="giftAG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4re-J6-qgU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPW-ZD-XwE">
+                                <rect key="frame" x="524" y="332" width="32" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="KFS-6O-tZb"/>
+                                    <constraint firstAttribute="height" constant="30" id="izp-Y3-HYd"/>
+                                </constraints>
+                                <state key="normal" title="B G1"/>
+                                <connections>
+                                    <action selector="giftBG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="COK-JA-ZB5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYN-6v-Xdv">
+                                <rect key="frame" x="523" y="370" width="34" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="bnJ-cW-YZv"/>
+                                    <constraint firstAttribute="height" constant="30" id="yqd-EE-nuf"/>
+                                </constraints>
+                                <state key="normal" title="B G2"/>
+                                <connections>
+                                    <action selector="giftBG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KUA-OU-UdY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WPW-ZD-XwE" firstAttribute="top" secondItem="aZA-qO-dxK" secondAttribute="bottom" constant="36" id="Jln-QX-Fav"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WPW-ZD-XwE" secondAttribute="trailing" constant="21" id="bXZ-oR-COt"/>
-                            <constraint firstItem="aZA-qO-dxK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="236" id="klP-va-EB5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aZA-qO-dxK" secondAttribute="trailing" constant="21" id="qjH-LA-AIY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D8q-Fq-26q" secondAttribute="trailing" constant="23" id="3BD-Wm-nCY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eYN-6v-Xdv" secondAttribute="trailing" constant="23" id="7Za-fX-cCN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D8q-Fq-26q" secondAttribute="trailing" constant="23" id="AIb-rh-mbA"/>
+                            <constraint firstItem="D8q-Fq-26q" firstAttribute="top" secondItem="aZA-qO-dxK" secondAttribute="bottom" constant="8" id="HJZ-Sk-wId"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WPW-ZD-XwE" secondAttribute="trailing" constant="24" id="SRE-sc-aJc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aZA-qO-dxK" secondAttribute="trailing" constant="24" id="WbP-b4-5q1"/>
+                            <constraint firstItem="aZA-qO-dxK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="236" id="edo-Ah-Fsv"/>
+                            <constraint firstItem="eYN-6v-Xdv" firstAttribute="top" secondItem="WPW-ZD-XwE" secondAttribute="bottom" constant="8" id="oMx-xK-F2E"/>
+                            <constraint firstItem="WPW-ZD-XwE" firstAttribute="top" secondItem="D8q-Fq-26q" secondAttribute="bottom" constant="8" id="rFe-LO-kGD"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -33,11 +33,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)giftABtnTouched:(id)sender {
-    [giftNoticeView addNotice];
+- (IBAction)giftAG1tnTouched:(id)sender {
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
 }
-- (IBAction)giftBBtnTouched:(id)sender {
-    NSLog(@"giftBBBBBBBBBBBBBtnTouched");
+- (IBAction)giftAG2tnTouched:(id)sender {
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G2" Count:@"1"];
+}
+- (IBAction)giftBG1tnTouched:(id)sender {
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G1" Count:@"1"];
+}
+- (IBAction)giftBG2tnTouched:(id)sender {
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
 }
 
 @end

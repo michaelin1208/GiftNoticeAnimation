@@ -17,6 +17,7 @@
 		739A79E61CCE05C4001624F7 /* GiftNoticeAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 739A79E51CCE05C4001624F7 /* GiftNoticeAnimationUITests.m */; };
 		739A79F41CCE07B1001624F7 /* GiftNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 739A79F31CCE07B1001624F7 /* GiftNoticeView.m */; };
 		739A79F91CCE0C10001624F7 /* GiftNoticeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 739A79F81CCE0C10001624F7 /* GiftNoticeCellView.m */; };
+		73F4D3CB1CCEFDEB00AA23F8 /* ActiveGiftNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		739A79F61CCE07C8001624F7 /* GiftNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GiftNoticeView.h; sourceTree = "<group>"; };
 		739A79F71CCE0BF7001624F7 /* GiftNoticeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftNoticeCellView.h; sourceTree = "<group>"; };
 		739A79F81CCE0C10001624F7 /* GiftNoticeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftNoticeCellView.m; sourceTree = "<group>"; };
+		73F4D3C91CCEFDD200AA23F8 /* ActiveGiftNotice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveGiftNotice.h; sourceTree = "<group>"; };
+		73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveGiftNotice.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				739A79F31CCE07B1001624F7 /* GiftNoticeView.m */,
 				739A79F71CCE0BF7001624F7 /* GiftNoticeCellView.h */,
 				739A79F81CCE0C10001624F7 /* GiftNoticeCellView.m */,
+				73F4D3C91CCEFDD200AA23F8 /* ActiveGiftNotice.h */,
+				73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */,
 				739A79CC1CCE05C4001624F7 /* Assets.xcassets */,
 				739A79CE1CCE05C4001624F7 /* LaunchScreen.storyboard */,
 				739A79D11CCE05C4001624F7 /* Info.plist */,
@@ -282,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				739A79F91CCE0C10001624F7 /* GiftNoticeCellView.m in Sources */,
+				73F4D3CB1CCEFDEB00AA23F8 /* ActiveGiftNotice.m in Sources */,
 				739A79F41CCE07B1001624F7 /* GiftNoticeView.m in Sources */,
 				739A79C81CCE05C4001624F7 /* ViewController.m in Sources */,
 				739A79C51CCE05C4001624F7 /* AppDelegate.m in Sources */,
@@ -517,6 +523,7 @@
 				739A79EC1CCE05C4001624F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		739A79ED1CCE05C4001624F7 /* Build configuration list for PBXNativeTarget "GiftNoticeAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +532,7 @@
 				739A79EF1CCE05C4001624F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		739A79F01CCE05C4001624F7 /* Build configuration list for PBXNativeTarget "GiftNoticeAnimationUITests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +541,7 @@
 				739A79F21CCE05C4001624F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

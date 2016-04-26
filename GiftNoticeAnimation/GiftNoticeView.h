@@ -10,6 +10,6 @@
 
 @interface GiftNoticeView : UIView
 
-- (void)addNotice;
+- (void)insertWaitingGiftNoticesWithSender:(NSString *)sender Gift: (NSString *)gift Count:(NSString *)count;
 
 @end
