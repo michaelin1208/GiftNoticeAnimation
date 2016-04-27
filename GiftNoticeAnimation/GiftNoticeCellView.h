@@ -10,6 +10,7 @@
 
 @interface GiftNoticeCellView : UIView
 
+@property (strong, nonatomic) UIImageView *headImageView;
 @property (strong, nonatomic) UILabel *giftSenderLabel;
 @property (strong, nonatomic) UILabel *giftNameLabel;
 @property (strong, nonatomic) UILabel *countLabel;

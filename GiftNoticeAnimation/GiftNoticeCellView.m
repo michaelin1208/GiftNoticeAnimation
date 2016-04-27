@@ -9,14 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "GiftNoticeCellView.h"
 
-#define kGiftNoticeCellViewWidth 200
-#define kGiftNoticeCellViewHeight 50
+#define kGiftNoticeCellViewWidth 202
+#define kGiftNoticeCellViewHeight 34
 #define kGiftNoticeCellLabelWidth 100
-#define kGiftNoticeCellLabelHeight 20
+#define kGiftNoticeCellLabelHeight 13
 #define kCountLabelWidth 40
 #define kCountLabelHeight 40
 #define kRunDuration 0.5
 #define kStayDuration 0.5
+
+
+#define kNormalGiftHeadBtnWidth 35
+#define kNormalGiftHeadBtnHeight kNormalGiftHeadBtnWidth
+
+
+#define kCLDefaultHeadImage [UIImage imageNamed:@"Defaulthead"]
 
 @interface GiftNoticeCellView ()
 
@@ -54,22 +61,37 @@
         _isDisappear = YES;
         _isUsable = YES;
         _isUsed = NO;
-//        UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
-//        self.backgroundColor = [UIColor colorWithPatternImage:bgImage];;
+        UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
+        self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
         self.frame = CGRectMake(0, 0, kGiftNoticeCellViewWidth, kGiftNoticeCellViewHeight);
-        self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 4, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
-        self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 25, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
+        self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 4, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
+        self.giftSenderLabel.textColor = [UIColor yellowColor];
+        self.giftSenderLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 17, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
+        self.giftNameLabel.textColor = [UIColor yellowColor];
+        self.giftNameLabel.font = [UIFont boldSystemFontOfSize:12];
         self.countLabel = [[UILabel alloc] initWithFrame: CGRectMake(kGiftNoticeCellViewWidth - kCountLabelWidth - (kGiftNoticeCellViewHeight - kCountLabelHeight)/2, (kGiftNoticeCellViewHeight - kCountLabelHeight)/2, kCountLabelWidth, kCountLabelHeight)];
         self.countLabel.layer.anchorPoint = CGPointMake(0.5, 0.5);
         self.countLabel.font = [UIFont boldSystemFontOfSize:32];
+        self.countLabel.textColor = [UIColor redColor];
         self.countLabel.textAlignment = NSTextAlignmentCenter;
         self.countLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 //        self.countLabel.adjustsFontSizeToFitWidth = YES;
-        self.countLabel.backgroundColor = [UIColor yellowColor];
+//        self.countLabel.backgroundColor = [UIColor yellowColor];
         
         [self addSubview: self.giftSenderLabel];
         [self addSubview: self.giftNameLabel];
         [self addSubview: self.countLabel];
+        
+        
+        self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kNormalGiftHeadBtnWidth, kNormalGiftHeadBtnHeight)];
+        [self.headImageView setImage:kCLDefaultHeadImage];
+        self.headImageView.layer.cornerRadius = kNormalGiftHeadBtnHeight/2;
+        self.headImageView.layer.masksToBounds = YES;
+        self.headImageView.layer.borderWidth = 1.0;
+        self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+        [self addSubview: self.headImageView];
+        
         
         self.countLabel.hidden = YES;
         

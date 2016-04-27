@@ -33,7 +33,7 @@
         waitingGiftNotices = [[NSMutableArray alloc] init];
         activeGiftNotices = [[NSMutableArray alloc] init];
         
-        self.backgroundColor = [UIColor blueColor];
+//        self.backgroundColor = [UIColor blueColor];
         
         for(int i=0; i<kGiftLinesQty; i ++){
             
