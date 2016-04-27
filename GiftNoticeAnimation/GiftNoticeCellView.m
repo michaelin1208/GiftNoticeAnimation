@@ -11,16 +11,20 @@
 
 #define kGiftNoticeCellViewWidth 202
 #define kGiftNoticeCellViewHeight 34
-#define kGiftNoticeCellLabelWidth 100
+#define kGiftNoticeCellLabelWidth 120
 #define kGiftNoticeCellLabelHeight 13
-#define kCountLabelWidth 40
-#define kCountLabelHeight 40
-#define kRunDuration 0.5
-#define kStayDuration 0.5
+#define kGiftMargin 5
+#define kCountLabelWidth 30
+#define kCountLabelHeight kCountLabelWidth
+#define kRunDuration 0.4
+#define kStayDuration 0.4
 
 
 #define kNormalGiftHeadBtnWidth 35
 #define kNormalGiftHeadBtnHeight kNormalGiftHeadBtnWidth
+
+#define kGiftImageViewWidth 40
+#define kGiftImageViewHeight kGiftImageViewWidth
 
 
 #define kCLDefaultHeadImage [UIImage imageNamed:@"Defaulthead"]
@@ -34,7 +38,9 @@
     UIView* backgroundView;
     CAAnimationGroup *appearAnimation;
     CAAnimationGroup *disappearAnimation;
-    CABasicAnimation *increaseAnimation;
+    CABasicAnimation *increaseAnimation1;
+    CABasicAnimation *increaseAnimation2;
+    CABasicAnimation *increaseAnimation3;
     Boolean firstStep;
     
     CGPoint startPoint;
@@ -70,18 +76,15 @@
         self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 17, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
         self.giftNameLabel.textColor = [UIColor yellowColor];
         self.giftNameLabel.font = [UIFont boldSystemFontOfSize:12];
-        self.countLabel = [[UILabel alloc] initWithFrame: CGRectMake(kGiftNoticeCellViewWidth - kCountLabelWidth - (kGiftNoticeCellViewHeight - kCountLabelHeight)/2, (kGiftNoticeCellViewHeight - kCountLabelHeight)/2, kCountLabelWidth, kCountLabelHeight)];
+        self.countLabel = [[UILabel alloc] initWithFrame: CGRectMake(210, 0, kCountLabelWidth, kCountLabelHeight)];
         self.countLabel.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        self.countLabel.font = [UIFont boldSystemFontOfSize:32];
+        self.countLabel.font = [UIFont boldSystemFontOfSize:20];
         self.countLabel.textColor = [UIColor redColor];
         self.countLabel.textAlignment = NSTextAlignmentCenter;
         self.countLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 //        self.countLabel.adjustsFontSizeToFitWidth = YES;
 //        self.countLabel.backgroundColor = [UIColor yellowColor];
         
-        [self addSubview: self.giftSenderLabel];
-        [self addSubview: self.giftNameLabel];
-        [self addSubview: self.countLabel];
         
         
         self.headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kNormalGiftHeadBtnWidth, kNormalGiftHeadBtnHeight)];
@@ -92,6 +95,14 @@
         self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview: self.headImageView];
         
+        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, kGiftNoticeCellViewHeight - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
+        [self.giftImageView setImage:kCLDefaultHeadImage];
+        [self addSubview: self.giftImageView];
+        
+        
+        [self addSubview: self.giftSenderLabel];
+        [self addSubview: self.giftNameLabel];
+        [self addSubview: self.countLabel];
         
         self.countLabel.hidden = YES;
         
@@ -139,6 +150,7 @@
     appearAnimation = [CAAnimationGroup animation];
     appearAnimation.animations = [NSArray arrayWithObjects:moveInAnimation, opacityIncreaseAnimation, nil];
     appearAnimation.duration = kRunDuration;
+    appearAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     appearAnimation.removedOnCompletion = NO;
     appearAnimation.delegate = self;
     
@@ -162,19 +174,46 @@
     disappearAnimation = [CAAnimationGroup animation];
     disappearAnimation.animations = [NSArray arrayWithObjects:moveOutAnimation, opacitydecreaseAnimation, nil];
     disappearAnimation.duration = kRunDuration;
+    disappearAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     disappearAnimation.removedOnCompletion = NO;
     disappearAnimation.delegate = self;
     
     
     //increase count animation
-    increaseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    increaseAnimation.fromValue = [NSNumber numberWithFloat:3.0];
+    increaseAnimation1 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    increaseAnimation1.fromValue = [NSNumber numberWithFloat:6.0];
     //x，y轴缩小到0.1,Z 轴不变
-    increaseAnimation.toValue = [NSNumber numberWithFloat:1.0];
-//    increaseAnimation.removedOnCompletion = YES;
-    increaseAnimation.duration = kStayDuration;
-    increaseAnimation.removedOnCompletion = NO;
-    increaseAnimation.delegate = self;
+    increaseAnimation1.toValue = [NSNumber numberWithFloat:1.0];
+    //    increaseAnimation.removedOnCompletion = YES;
+    increaseAnimation1.duration = 0.3f;
+    increaseAnimation1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    increaseAnimation1.removedOnCompletion = NO;
+    increaseAnimation1.fillMode = kCAFillModeForwards;
+    increaseAnimation1.delegate = self;
+    
+    increaseAnimation2 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    increaseAnimation2.fromValue = [NSNumber numberWithFloat:1.0];
+    //x，y轴缩小到0.1,Z 轴不变
+    increaseAnimation2.toValue = [NSNumber numberWithFloat:2.0];
+    //    increaseAnimation.removedOnCompletion = YES;
+    increaseAnimation2.duration = 0.2;
+    increaseAnimation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    increaseAnimation2.removedOnCompletion = NO;
+    increaseAnimation2.fillMode = kCAFillModeForwards;
+    increaseAnimation2.delegate = self;
+    
+    increaseAnimation3 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    increaseAnimation3.fromValue = [NSNumber numberWithFloat:2.0];
+    //x，y轴缩小到0.1,Z 轴不变
+    increaseAnimation3.toValue = [NSNumber numberWithFloat:1.0];
+    //    increaseAnimation.removedOnCompletion = YES;
+    increaseAnimation3.duration = 0.2;
+    increaseAnimation3.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    increaseAnimation3.removedOnCompletion = NO;
+    increaseAnimation3.fillMode = kCAFillModeForwards;
+    increaseAnimation3.delegate = self;
+    
+    
 }
 
 - (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)sender Gift:(NSString *)gift {
@@ -217,16 +256,20 @@
         //appearAnimation finished
 //            _isUsable = YES;
         [self increaseAnimation];
-    }
-    
-    
-    if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation"]) {
-        //increaseAnimation finished
+    }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation1"]) {
+        //increaseAnimation1 finished
         NSLog(@"cellid %d sleep %d", _cellID, currentCount);
-        [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
-    }
-    
-    if (anim == [self.layer animationForKey:@"disappearAnimation"]) {
+        [self.countLabel.layer addAnimation:increaseAnimation2 forKey:@"increaseAnimation2"];
+    }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation2"]) {
+        //increaseAnimation2 finished
+        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+        [self.countLabel.layer addAnimation:increaseAnimation3 forKey:@"increaseAnimation3"];
+    }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation3"]) {
+        //increaseAnimation3 finished
+        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+        [self increaseAnimation];
+//                [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
+    }else if (anim == [self.layer animationForKey:@"disappearAnimation"]) {
         //disappearAnimation finished
 
         self.hidden = YES;
@@ -289,7 +332,7 @@
         [self.countLabel sizeToFit];
         [self.layer removeAllAnimations];
         [self.countLabel.layer removeAllAnimations];
-        [self.countLabel.layer addAnimation:increaseAnimation forKey:@"increaseAnimation"];
+        [self.countLabel.layer addAnimation:increaseAnimation1 forKey:@"increaseAnimation1"];
         firstStep = NO;
     }else{
 //        waitingTimeInterval = [[NSDate date] timeIntervalSince1970]; // record

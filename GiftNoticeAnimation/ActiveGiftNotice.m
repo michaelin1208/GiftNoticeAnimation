@@ -40,7 +40,6 @@
     
     int currentCount;
     int targetCount;
-    long currentTimeInterval;
     Boolean isShown;
 }
 
@@ -50,7 +49,7 @@
     if (self) {
         currentCount = 0;
         targetCount = 0;
-        currentTimeInterval = [[NSDate date] timeIntervalSince1970];
+        _updateTime = [[NSDate date] timeIntervalSince1970];
 //        _allocatedCell = cell;
         _senderName = sender;
         _giftName = gift;
@@ -60,7 +59,7 @@
 
 - (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell {
     
-    currentTimeInterval = [[NSDate date] timeIntervalSince1970];
+    _updateTime = [[NSDate date] timeIntervalSince1970];
     targetCount = currentCount + number;
     
     [cell increaseCellWithCurrentCount:currentCount TargetCount:targetCount Sender:_senderName Gift:_giftName];

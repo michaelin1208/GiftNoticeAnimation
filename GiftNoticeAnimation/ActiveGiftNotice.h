@@ -17,6 +17,7 @@
 @property (strong, nonatomic) GiftNoticeCellView *allocatedCell;
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *giftName;
+@property (nonatomic) long updateTime;
 
 - (instancetype)initWithSender:(NSString *)sender Gift:(NSString *)gift;
 - (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell;

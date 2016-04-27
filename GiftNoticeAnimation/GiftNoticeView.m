@@ -11,8 +11,9 @@
 #import "GiftNoticeCellView.h"
 #import "ActiveGiftNotice.h"
 
-#define kGapHeight 5
+#define kGapHeight 10
 #define kGiftLinesQty 3
+#define kValidPeriod 5
 
 @interface GiftNoticeView ()
 
@@ -176,12 +177,22 @@
 
 
 - (ActiveGiftNotice *)findActiveGiftNoticeBySender:(NSString *)sender Gift:(NSString *)gift{
-    for(ActiveGiftNotice *tempNotice in activeGiftNotices){
-        if ([tempNotice.senderName isEqualToString:sender] && [tempNotice.giftName isEqualToString:gift]){
-            return tempNotice;
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    long now = [[NSDate date] timeIntervalSince1970];
+    ActiveGiftNotice *returnNotice = nil;
+    @synchronized (activeGiftNotices) {
+        for(ActiveGiftNotice *tempNotice in activeGiftNotices){
+            if (now - tempNotice.updateTime < kValidPeriod) {
+                [tempArray addObject:tempNotice];
+                if ([tempNotice.senderName isEqualToString:sender] && [tempNotice.giftName isEqualToString:gift]){
+                    returnNotice = tempNotice;
+                }
+            }
         }
+        activeGiftNotices = tempArray;
     }
-    return nil;
+    
+    return returnNotice;
 }
 
 
