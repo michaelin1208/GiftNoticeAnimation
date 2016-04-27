@@ -20,6 +20,7 @@
 
 
 @property (nonatomic) Boolean isUsable;
+@property (nonatomic) Boolean isUsed;
 @property (nonatomic) Boolean isDisappear;
 @property (nonatomic) Boolean canDisappear;
 @property (nonatomic) Boolean canKeepWaiting;

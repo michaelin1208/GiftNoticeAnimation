@@ -35,6 +35,43 @@
 }
 - (IBAction)giftAG1tnTouched:(id)sender {
     [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G2" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"B" Gift:@"G2" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
+//    [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G1" Count:@"1"];
 }
 - (IBAction)giftAG2tnTouched:(id)sender {
     [giftNoticeView insertWaitingGiftNoticesWithSender:@"A" Gift:@"G2" Count:@"1"];

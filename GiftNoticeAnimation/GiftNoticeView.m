@@ -95,14 +95,27 @@
 
 
 - (void)insertWaitingGiftNoticesWithSender:(NSString *)sender Gift: (NSString *)gift Count:(NSString *)count{
-    [waitingGiftNotices addObject:[NSDictionary dictionaryWithObjectsAndKeys:sender, @"sender", gift, @"gift", count, @"count", nil]];
-    [self checkWaitingGiftNotices];
+    @synchronized (waitingGiftNotices) {
+        NSMutableDictionary *lastDictionary = [waitingGiftNotices lastObject];
+        if (lastDictionary == nil) {
+            [waitingGiftNotices addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:sender, @"sender", gift, @"gift", count, @"count", nil]];
+        }else{
+            if ([[lastDictionary objectForKey:@"sender"] isEqualToString:sender]&&[[lastDictionary objectForKey:@"gift"] isEqualToString: gift]) {
+                NSLog(@"add count");
+                [lastDictionary setValue:[NSString stringWithFormat:@"%d",([[lastDictionary objectForKey:@"count"] intValue] + [count intValue])] forKey:@"count"];
+            }else{
+                [waitingGiftNotices addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:sender, @"sender", gift, @"gift", count, @"count", nil]];
+            }
+        }
+        
+        [self checkWaitingGiftNotices];
+    }
 }
 
 - (void)checkWaitingGiftNotices{
     @synchronized (waitingGiftNotices) {
         if (waitingGiftNotices.count > 0) {
-            NSDictionary *nextGiftNoticeDic = [waitingGiftNotices objectAtIndex:0];
+            NSMutableDictionary *nextGiftNoticeDic = [waitingGiftNotices objectAtIndex:0];
             NSString *tempSender = [nextGiftNoticeDic objectForKey:@"sender"];
             NSString *tempGift = [nextGiftNoticeDic objectForKey:@"gift"];
             NSString *tempCount = [nextGiftNoticeDic objectForKey:@"count"];
@@ -118,11 +131,14 @@
                     tempActiveGiftNotice = [[ActiveGiftNotice alloc] initWithSender:tempSender Gift:tempGift];
                     [activeGiftNotices addObject:tempActiveGiftNotice];
                 }
+                
                 [tempActiveGiftNotice increaseCount:[tempCount intValue] withCell:tempGiftNoticeCellView];
+                NSLog(@"cellid %d %@ %@ increaseCount %d", tempGiftNoticeCellView.cellID, tempSender, tempGift, [tempCount intValue]);
                 [waitingGiftNotices removeObjectAtIndex:0];
                 
                 //keep finding
                 [self checkWaitingGiftNotices];
+                
             }
         }
     }
@@ -139,17 +155,22 @@
 }
 
 - (GiftNoticeCellView *)findFeasibleCellBySender:(NSString *)sender Gift:(NSString *)gift{
+    NSLog(@"findFeasibleCellBySender");
     for(GiftNoticeCellView* tempCell in cells){
-        if ([tempCell.senderName isEqualToString:sender] && [tempCell.giftName isEqualToString:gift]){
+        if ([tempCell.senderName isEqualToString:sender] && [tempCell.giftName isEqualToString:gift] && !tempCell.isDisappear){
+            NSLog(@"reuse return %d",tempCell.cellID);
             return tempCell;
         }
     }
     
     for(GiftNoticeCellView* tempCell in cells){
+        NSLog(@"cell id %d %d %d",tempCell.cellID, tempCell.isDisappear, tempCell.isUsable);
         if(tempCell.isDisappear && tempCell.isUsable){
+            NSLog(@"new return %d",tempCell.cellID);
             return tempCell;
         }
     }
+    NSLog(@"findFeasibleCellBySender");
     return nil;
 }
 
