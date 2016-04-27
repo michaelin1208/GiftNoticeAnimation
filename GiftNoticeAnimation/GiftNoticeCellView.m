@@ -15,8 +15,8 @@
 #define kGiftNoticeCellLabelHeight 20
 #define kCountLabelWidth 40
 #define kCountLabelHeight 40
-#define kRunDuration 1
-#define kStayDuration 1
+#define kRunDuration 0.5
+#define kStayDuration 0.5
 
 @interface GiftNoticeCellView ()
 
@@ -34,14 +34,14 @@
     CGPoint stayPoint;
     CGPoint endPoint;
     
-    int count;
+    int waitingCount;
     
     int currentCount;
     int targetCount;
     
     int animationType;
     
-    long currentTimeInterval;
+//    long waitingTimeInterval;
     
 }
 
@@ -71,7 +71,7 @@
         
         self.countLabel.hidden = YES;
         
-        count = 0;
+        waitingCount = 0;
         currentCount = 0;
         targetCount = 0;
         
@@ -198,6 +198,8 @@
             self.countLabel.hidden = YES;
             _isUsable = YES;
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"IAmDisappeared" object:[NSNumber numberWithInt:_cellID]];
+            
             break;
             
         default:
@@ -228,7 +230,26 @@
         [self.countLabel.layer addAnimation:increaseAnimation forKey:@"increaseAnimation"];
         firstStep = NO;
     }else{
+//        waitingTimeInterval = [[NSDate date] timeIntervalSince1970]; // record
         _isUsable = YES;
+//        waitingCount ++;
+        _canKeepWaiting = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"IAmWaiting" object:[NSNumber numberWithInt:_cellID]];
+        
+    }
+}
+
+- (void) startToWait{
+    waitingCount++;
+    [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(endWaiting) userInfo:nil repeats:NO];
+}
+
+- (void) endWaiting{
+    waitingCount--;
+    if (waitingCount <= 0) {
+        NSLog(@"send IWantToDisappear");
+        _canDisappear = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"IWantToDisappear" object:[NSNumber numberWithInt:_cellID]];
     }
 }
 
@@ -239,6 +260,14 @@
     [self.layer addAnimation:disappearAnimation forKey:@"disappearAnimation"];
     self.layer.position = endPoint;
     self.layer.opacity = 0.0;
+}
+
+- (Boolean) noMore{
+    if (currentCount < targetCount) {
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 

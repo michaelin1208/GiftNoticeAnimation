@@ -21,12 +21,16 @@
 
 @property (nonatomic) Boolean isUsable;
 @property (nonatomic) Boolean isDisappear;
+@property (nonatomic) Boolean canDisappear;
+@property (nonatomic) Boolean canKeepWaiting;
 
 //+ (GiftNoticeCellView *)instanceGiftNoticeCellView;
 
 - (void)initAnimations;
 - (void)appearCellWithCount: (int)count Sender: (NSString *)name Gift:(NSString *)gift;
 - (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)name Gift:(NSString *)gift;
-- (void)startToDisappear;
+
+- (void) startToWait;
+- (void) disappearAnimation;
 
 @end
