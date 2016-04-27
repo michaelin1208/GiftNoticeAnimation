@@ -10,6 +10,8 @@
 #import "GiftNoticeView.h"
 #import "GiftNoticeCellView.h"
 #import "ActiveGiftNotice.h"
+#import "FireworkAnimation.h"
+#import "Car.h"
 
 #define kGapHeight 10
 #define kGiftLinesQty 3
@@ -25,6 +27,8 @@
     NSMutableArray* cells;
     NSMutableArray* waitingGiftNotices;
     NSMutableArray* activeGiftNotices;
+    
+
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -71,6 +75,7 @@
     }
     return self;
 }
+
 
 - (void)ACellIsWaiting:(NSNotification *)notification{
     [self checkWaitingGiftNotices];

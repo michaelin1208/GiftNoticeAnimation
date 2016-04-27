@@ -20,10 +20,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZA-qO-dxK">
                                 <rect key="frame" x="524" y="256" width="32" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="87t-eT-uJH"/>
-                                    <constraint firstAttribute="width" constant="32" id="zMx-4r-cyY"/>
-                                </constraints>
                                 <state key="normal" title="A G1"/>
                                 <connections>
                                     <action selector="giftAG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LhQ-Lh-ysE"/>
@@ -31,10 +27,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8q-Fq-26q">
                                 <rect key="frame" x="523" y="294" width="34" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="5B3-k4-Z2O"/>
-                                    <constraint firstAttribute="height" constant="30" id="OdB-h6-JKe"/>
-                                </constraints>
                                 <state key="normal" title="A G2"/>
                                 <connections>
                                     <action selector="giftAG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4re-J6-qgU"/>
@@ -42,21 +34,41 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPW-ZD-XwE">
                                 <rect key="frame" x="524" y="332" width="32" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="KFS-6O-tZb"/>
-                                    <constraint firstAttribute="height" constant="30" id="izp-Y3-HYd"/>
-                                </constraints>
                                 <state key="normal" title="B G1"/>
                                 <connections>
                                     <action selector="giftBG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="COK-JA-ZB5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zd9-Zg-CB5">
+                                <rect key="frame" x="515" y="408" width="41" height="30"/>
+                                <state key="normal" title="A SG1"/>
+                                <connections>
+                                    <action selector="giftASG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6tl-aC-eSg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3j1-aZ-odd">
+                                <rect key="frame" x="514" y="446" width="43" height="30"/>
+                                <state key="normal" title="A SG2"/>
+                                <connections>
+                                    <action selector="giftASG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wH2-dO-Mcc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="820-Zb-oWp">
+                                <rect key="frame" x="515" y="484" width="41" height="30"/>
+                                <state key="normal" title="B SG1"/>
+                                <connections>
+                                    <action selector="giftBSG1tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UR9-KX-LxF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilX-w8-t0E">
+                                <rect key="frame" x="513" y="522" width="43" height="30"/>
+                                <state key="normal" title="B SG2"/>
+                                <connections>
+                                    <action selector="giftBSG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QsY-dm-LoH"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYN-6v-Xdv">
                                 <rect key="frame" x="523" y="370" width="34" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="bnJ-cW-YZv"/>
-                                    <constraint firstAttribute="height" constant="30" id="yqd-EE-nuf"/>
-                                </constraints>
                                 <state key="normal" title="B G2"/>
                                 <connections>
                                     <action selector="giftBG2tnTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KUA-OU-UdY"/>
@@ -65,15 +77,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="D8q-Fq-26q" secondAttribute="trailing" constant="23" id="3BD-Wm-nCY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eYN-6v-Xdv" secondAttribute="trailing" constant="23" id="7Za-fX-cCN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="D8q-Fq-26q" secondAttribute="trailing" constant="23" id="AIb-rh-mbA"/>
-                            <constraint firstItem="D8q-Fq-26q" firstAttribute="top" secondItem="aZA-qO-dxK" secondAttribute="bottom" constant="8" id="HJZ-Sk-wId"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WPW-ZD-XwE" secondAttribute="trailing" constant="24" id="SRE-sc-aJc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aZA-qO-dxK" secondAttribute="trailing" constant="24" id="WbP-b4-5q1"/>
-                            <constraint firstItem="aZA-qO-dxK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="236" id="edo-Ah-Fsv"/>
-                            <constraint firstItem="eYN-6v-Xdv" firstAttribute="top" secondItem="WPW-ZD-XwE" secondAttribute="bottom" constant="8" id="oMx-xK-F2E"/>
-                            <constraint firstItem="WPW-ZD-XwE" firstAttribute="top" secondItem="D8q-Fq-26q" secondAttribute="bottom" constant="8" id="rFe-LO-kGD"/>
+                            <constraint firstItem="3j1-aZ-odd" firstAttribute="top" secondItem="Zd9-Zg-CB5" secondAttribute="bottom" constant="8" symbolic="YES" id="1s8-9s-sc6"/>
+                            <constraint firstItem="D8q-Fq-26q" firstAttribute="top" secondItem="aZA-qO-dxK" secondAttribute="bottom" constant="8" symbolic="YES" id="39j-sS-pbF"/>
+                            <constraint firstItem="ilX-w8-t0E" firstAttribute="top" secondItem="820-Zb-oWp" secondAttribute="bottom" constant="8" symbolic="YES" id="9Xm-ug-Yba"/>
+                            <constraint firstItem="aZA-qO-dxK" firstAttribute="leading" secondItem="WPW-ZD-XwE" secondAttribute="leading" id="9un-g4-ozy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D8q-Fq-26q" secondAttribute="trailing" constant="23" id="AyT-z9-NU9"/>
+                            <constraint firstItem="eYN-6v-Xdv" firstAttribute="top" secondItem="WPW-ZD-XwE" secondAttribute="bottom" constant="8" symbolic="YES" id="FyO-Pp-blI"/>
+                            <constraint firstItem="eYN-6v-Xdv" firstAttribute="trailing" secondItem="3j1-aZ-odd" secondAttribute="trailing" id="GlP-1o-Nim"/>
+                            <constraint firstItem="D8q-Fq-26q" firstAttribute="leading" secondItem="eYN-6v-Xdv" secondAttribute="leading" id="JMA-6r-yFM"/>
+                            <constraint firstItem="Zd9-Zg-CB5" firstAttribute="leading" secondItem="820-Zb-oWp" secondAttribute="leading" id="PXp-s3-4nB"/>
+                            <constraint firstItem="820-Zb-oWp" firstAttribute="top" secondItem="3j1-aZ-odd" secondAttribute="bottom" constant="8" symbolic="YES" id="YeE-ug-VmU"/>
+                            <constraint firstItem="aZA-qO-dxK" firstAttribute="centerX" secondItem="D8q-Fq-26q" secondAttribute="centerX" id="Ygt-uS-ix3"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ilX-w8-t0E" secondAttribute="bottom" constant="48" id="ZHh-HW-ZEX"/>
+                            <constraint firstItem="WPW-ZD-XwE" firstAttribute="top" secondItem="D8q-Fq-26q" secondAttribute="bottom" constant="8" symbolic="YES" id="aIk-qu-Kpw"/>
+                            <constraint firstItem="Zd9-Zg-CB5" firstAttribute="top" secondItem="eYN-6v-Xdv" secondAttribute="bottom" constant="8" symbolic="YES" id="bBG-nd-37d"/>
+                            <constraint firstItem="820-Zb-oWp" firstAttribute="trailing" secondItem="ilX-w8-t0E" secondAttribute="trailing" id="m1A-PA-N0V"/>
+                            <constraint firstItem="WPW-ZD-XwE" firstAttribute="trailing" secondItem="Zd9-Zg-CB5" secondAttribute="trailing" id="qDb-Sl-Lmr"/>
                         </constraints>
                     </view>
                 </viewController>

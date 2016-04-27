@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "GiftNoticeCellView.h"
 
+#import "FireworkAnimation.h"
+#import "Car.h"
+
 #define kGiftNoticeCellViewWidth 202
 #define kGiftNoticeCellViewHeight 34
 #define kGiftNoticeCellLabelWidth 120
@@ -54,6 +57,8 @@
     
     int animationType;
     
+    FireworkAnimation *fireworkAnimation;
+    Car *car;
 //    long waitingTimeInterval;
     
 }
@@ -112,6 +117,9 @@
         
         _senderName = @"";
         _giftName = @"";
+        
+        car = [[Car alloc] init];
+        fireworkAnimation = [[FireworkAnimation alloc] init];
         
         
     }
@@ -317,6 +325,7 @@
     [self.layer addAnimation:appearAnimation forKey:@"appearAnimation"];
     self.layer.position = stayPoint;
     self.layer.opacity = 1.0;
+    [self checkGiftType:_giftName];
 }
 
 - (void) increaseAnimation{
@@ -358,6 +367,14 @@
         self.layer.opacity = 0.0;
     }else{
         _canDisappear = NO;
+    }
+}
+
+- (void)checkGiftType:(NSString *)gift{
+    if ([gift isEqualToString:@"firework"]) {
+        [fireworkAnimation startAnimationAtView:self.superview];
+    }else if ([gift isEqualToString:@"car"]) {
+        [car startAnimationAtView:self.superview];
     }
 }
 
