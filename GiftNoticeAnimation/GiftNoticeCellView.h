@@ -17,7 +17,9 @@
 @property (strong, nonatomic) UILabel *countLabel;
 
 @property (nonatomic) int cellID;
+@property (strong, nonatomic) NSString *senderID;
 @property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *giftID;
 @property (strong, nonatomic) NSString *giftName;
 
 
@@ -31,7 +33,7 @@
 
 - (void)initAnimations;
 - (void)appearCellWithCount: (int)count Sender: (NSString *)name Gift:(NSString *)gift;
-- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)name Gift:(NSString *)gift;
+- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount SenderID: (NSString *)senderID Name: (NSString *)senderName GiftID:(NSString *)giftID Name: (NSString *)giftName;
 
 - (void) startToWait;
 - (void) disappearAnimation;

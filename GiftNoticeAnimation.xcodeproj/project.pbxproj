@@ -23,6 +23,8 @@
 		73AC76B11CD0E827003E5FF5 /* Firework.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76A91CD0E827003E5FF5 /* Firework.m */; };
 		73AC76B21CD0E827003E5FF5 /* FireworkAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76AB1CD0E827003E5FF5 /* FireworkAnimation.m */; };
 		73AC76B31CD0E827003E5FF5 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76AD1CD0E827003E5FF5 /* Car.m */; };
+		73BFAC271CD1D0A9000E809A /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BFAC261CD1D0A9000E809A /* BannerView.m */; };
+		73BFAC2B1CD20EE6000E809A /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BFAC2A1CD20EE6000E809A /* MessageView.m */; };
 		73F4D3CB1CCEFDEB00AA23F8 /* ActiveGiftNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,10 @@
 		73AC76AB1CD0E827003E5FF5 /* FireworkAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireworkAnimation.m; sourceTree = "<group>"; };
 		73AC76AC1CD0E827003E5FF5 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
 		73AC76AD1CD0E827003E5FF5 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Car.m; sourceTree = "<group>"; };
+		73BFAC261CD1D0A9000E809A /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		73BFAC281CD1D0B9000E809A /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
+		73BFAC291CD20ED4000E809A /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
+		73BFAC2A1CD20EE6000E809A /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
 		73F4D3C91CCEFDD200AA23F8 /* ActiveGiftNotice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveGiftNotice.h; sourceTree = "<group>"; };
 		73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveGiftNotice.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +189,10 @@
 				73AC76AB1CD0E827003E5FF5 /* FireworkAnimation.m */,
 				73AC76AC1CD0E827003E5FF5 /* Car.h */,
 				73AC76AD1CD0E827003E5FF5 /* Car.m */,
+				73BFAC281CD1D0B9000E809A /* BannerView.h */,
+				73BFAC261CD1D0A9000E809A /* BannerView.m */,
+				73BFAC291CD20ED4000E809A /* MessageView.h */,
+				73BFAC2A1CD20EE6000E809A /* MessageView.m */,
 			);
 			name = SuperGiftAnimation;
 			sourceTree = "<group>";
@@ -329,6 +339,8 @@
 				739A79C81CCE05C4001624F7 /* ViewController.m in Sources */,
 				739A79C51CCE05C4001624F7 /* AppDelegate.m in Sources */,
 				739A79C21CCE05C4001624F7 /* main.m in Sources */,
+				73BFAC271CD1D0A9000E809A /* BannerView.m in Sources */,
+				73BFAC2B1CD20EE6000E809A /* MessageView.m in Sources */,
 				73AC76B21CD0E827003E5FF5 /* FireworkAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

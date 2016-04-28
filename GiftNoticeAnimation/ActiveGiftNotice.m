@@ -43,7 +43,7 @@
     Boolean isShown;
 }
 
-- (instancetype)initWithSender:(NSString *)sender Gift:(NSString *)gift
+- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName GiftID:(NSString *)giftID Name:(NSString *)giftName
 {
     self = [super init];
     if (self) {
@@ -51,8 +51,10 @@
         targetCount = 0;
         _updateTime = [[NSDate date] timeIntervalSince1970];
 //        _allocatedCell = cell;
-        _senderName = sender;
-        _giftName = gift;
+        _senderID = senderID;
+        _senderName = senderName;
+        _giftID = giftID;
+        _giftName = giftName;
     }
     return self;
 }
@@ -62,7 +64,7 @@
     _updateTime = [[NSDate date] timeIntervalSince1970];
     targetCount = currentCount + number;
     
-    [cell increaseCellWithCurrentCount:currentCount TargetCount:targetCount Sender:_senderName Gift:_giftName];
+    [cell increaseCellWithCurrentCount:currentCount TargetCount:targetCount SenderID:_senderID Name:_senderName GiftID:_giftID Name:_giftName];
     
     currentCount = targetCount;
 }

@@ -12,8 +12,6 @@
 #import "FireworkAnimation.h"
 #import "Car.h"
 
-#define kGiftNoticeCellViewWidth 202
-#define kGiftNoticeCellViewHeight 34
 #define kGiftNoticeCellLabelWidth 120
 #define kGiftNoticeCellLabelHeight 13
 #define kGiftMargin 5
@@ -63,9 +61,9 @@
     
 }
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         
         firstStep = YES;
@@ -74,7 +72,6 @@
         _isUsed = NO;
         UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
         self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
-        self.frame = CGRectMake(0, 0, kGiftNoticeCellViewWidth, kGiftNoticeCellViewHeight);
         self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 4, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
         self.giftSenderLabel.textColor = [UIColor yellowColor];
         self.giftSenderLabel.font = [UIFont boldSystemFontOfSize:12];
@@ -100,7 +97,7 @@
         self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview: self.headImageView];
         
-        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, kGiftNoticeCellViewHeight - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
+        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
         [self.giftImageView setImage:kCLDefaultHeadImage];
         [self addSubview: self.giftImageView];
         
@@ -115,7 +112,9 @@
         currentCount = 0;
         targetCount = 0;
         
+        _senderID = @"";
         _senderName = @"";
+        _giftID = @"";
         _giftName = @"";
         
         car = [[Car alloc] init];
@@ -224,11 +223,11 @@
     
 }
 
-- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount Sender: (NSString *)sender Gift:(NSString *)gift {
+- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount SenderID: (NSString *)senderID Name: (NSString *)senderName GiftID:(NSString *)giftID Name: (NSString *)giftName {
     
-    NSLog(@"SENDER %@ GIFT %@ COUNT %d", sender, gift, tCount);
+    NSLog(@"SENDER %@ GIFT %@ COUNT %d", senderID, giftID, tCount);
 //    currentTimeInterval = [[NSDate date] timeIntervalSince1970];
-    if([sender isEqualToString:_senderName] && [gift isEqualToString:_giftName] && !_isDisappear){
+    if([senderID isEqualToString:_senderID] && [giftID isEqualToString:_giftID] && !_isDisappear){
         if (_isUsable) {
             NSLog(@"AAAAAAAAAAAAAAA");
             currentCount = cCount;
@@ -240,8 +239,10 @@
         }
     }else{
         NSLog(@"CCCCCCCCCCCCCCCC");
-        _senderName = sender;
-        _giftName = gift;
+        _senderID = senderID;
+        _senderName = senderName;
+        _giftID = giftID;
+        _giftName = giftName;
         currentCount = cCount;
         targetCount = tCount;
         self.giftSenderLabel.text = [NSString stringWithFormat:@"%d %@", _cellID, _senderName];
@@ -325,7 +326,7 @@
     [self.layer addAnimation:appearAnimation forKey:@"appearAnimation"];
     self.layer.position = stayPoint;
     self.layer.opacity = 1.0;
-    [self checkGiftType:_giftName];
+//    [self checkGiftType:_giftName];
 }
 
 - (void) increaseAnimation{

@@ -15,11 +15,13 @@
 //+ (GiftNoticeCellView *)instanceGiftNoticeCellView;
 //@property (nonatomic) isShown;
 @property (strong, nonatomic) GiftNoticeCellView *allocatedCell;
+@property (strong, nonatomic) NSString *senderID;
 @property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *giftID;
 @property (strong, nonatomic) NSString *giftName;
 @property (nonatomic) long updateTime;
 
-- (instancetype)initWithSender:(NSString *)sender Gift:(NSString *)gift;
+- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName GiftID:(NSString *)giftID Name:(NSString *)giftName;
 - (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell;
     
 @end
