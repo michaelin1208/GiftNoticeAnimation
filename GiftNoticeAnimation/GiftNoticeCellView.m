@@ -372,9 +372,9 @@
 
 - (void)checkGiftType:(NSString *)gift{
     if ([gift isEqualToString:@"firework"]) {
-        [fireworkAnimation startAnimationAtView:self.superview];
+        [fireworkAnimation startAnimationAtView:self.superview.superview];
     }else if ([gift isEqualToString:@"car"]) {
-        [car startAnimationAtView:self.superview];
+        [car startAnimationAtView:self.superview.superview];
     }
 }
 
