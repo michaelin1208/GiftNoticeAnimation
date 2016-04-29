@@ -77,7 +77,7 @@
             int endHeight = self.frame.size.height;
             if(messageCells.count >0){
                 MessageView *tempMessageCell = [messageCells objectAtIndex:messageCells.count - 1];
-                endHeight = tempMessageCell.layer.position.y;
+                endHeight = tempMessageCell.layer.position.y - tempMessageCell.frame.size.height/2;
             }
             
             GiftNoticeCellView *tempCell = [[GiftNoticeCellView alloc] initWithFrame:CGRectMake(0, (endHeight - (i+1) * (kGiftNoticeCellViewHeight + kGapHeight)), kGiftNoticeCellViewWidth, kGiftNoticeCellViewHeight)];
@@ -197,11 +197,11 @@
                 
                 ActiveGiftNotice *tempActiveGiftNotice = [self findActiveGiftNoticeBySender:tempSenderID Gift:tempGiftID];
                 if (tempActiveGiftNotice == nil) {
-                    tempActiveGiftNotice = [[ActiveGiftNotice alloc] initWithSenderID:tempSenderID Name:tempSenderName GiftID:tempGiftID Name:tempGiftName];
+                    tempActiveGiftNotice = [[ActiveGiftNotice alloc] initWithSenderID:tempSenderID Name:tempSenderName ReceiverID:tempReceiverID name:tempReceiverName GiftID:tempGiftID Name:tempGiftName];
                     [activeGiftNotices addObject:tempActiveGiftNotice];
                 }
                 
-                [tempActiveGiftNotice increaseCount:[tempCount intValue] withCell:tempGiftNoticeCellView];
+                [tempActiveGiftNotice increaseCount:[tempCount intValue] withGiftNoticeCell:tempGiftNoticeCellView];
                 
                 // BannerView test
 //                [bannerView startAnimationWithSenderName:tempSenderName ReceiverName:@"test" GiftName:tempGiftName Count:tempCount InReceiver:YES];
@@ -235,7 +235,7 @@
                     NSLog(@"send next");
                     //test test bannerView startAnimationWithSenderName
                     [tempMessageCell startAnimationWithSenderName:tempSenderName ReceiverName:tempReceiverName Content:tempContent];
-                    [waitingMessages removeObject:0];
+                    [waitingMessages removeObjectAtIndex:0];
                 }
             }
             
@@ -260,8 +260,16 @@
             if (bannerView.isHidden) {
                 NSLog(@"send next");
                 //test test bannerView startAnimationWithSenderName
-                [bannerView startAnimationWithSenderName:tempSenderName ReceiverName:tempReceiverName GiftName:tempGiftName Count:tempCount InReceiver:YES];
-                [waitingBanners removeObject:0];
+                
+                ActiveGiftNotice *tempActiveGiftNotice = [self findActiveGiftNoticeBySender:tempSenderID Gift:tempGiftID];
+                if (tempActiveGiftNotice == nil) {
+                    tempActiveGiftNotice = [[ActiveGiftNotice alloc] initWithSenderID:tempSenderID Name:tempSenderName ReceiverID:tempReceiverID name:tempReceiverName GiftID:tempGiftID Name:tempGiftName];
+                    [activeGiftNotices addObject:tempActiveGiftNotice];
+                }
+                
+                [tempActiveGiftNotice increaseCount:[tempCount intValue] withBannerCell:bannerView];
+                
+                [waitingBanners removeObjectAtIndex:0];
             }
         }
     }

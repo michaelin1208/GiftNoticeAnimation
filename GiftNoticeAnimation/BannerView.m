@@ -139,6 +139,7 @@
     self.giftSenderLabel.text = senderName;
     self.giftNameLabel.text = [NSString stringWithFormat:@"送给 %@ %@", receiverName, giftName];
     self.countLabel.text = [NSString stringWithFormat:@"X %@", count];
+    [self.countLabel sizeToFit];
     
     if (isInReceiver) {
         stayDuration = kLongStayDuration;

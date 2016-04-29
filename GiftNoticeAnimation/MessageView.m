@@ -79,10 +79,10 @@
         self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview: self.headImageView];
         
-        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
-        [self.giftImageView setImage:kCLDefaultHeadImage];
+//        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
+//        [self.giftImageView setImage:kCLDefaultHeadImage];
         
-        [self addSubview: self.giftImageView];
+//        [self addSubview: self.giftImageView];
         [self addSubview: self.giftSenderLabel];
         [self addSubview: self.giftNameLabel];
         [self addSubview: self.countLabel];
@@ -93,9 +93,9 @@
 }
 
 - (void)initAnimation{
-    startPoint = CGPointMake(self.superview.frame.size.width, self.layer.position.y);
+    startPoint = CGPointMake(self.superview.frame.size.width + self.frame.size.width/2, self.layer.position.y);
 //    stayPoint = CGPointMake(self.superview.frame.size.width/2, self.frame.size.height/2 + 20);
-    endPoint = CGPointMake(-self.frame.size.width, self.layer.position.y);
+    endPoint = CGPointMake(-self.frame.size.width + self.frame.size.width/2, self.layer.position.y);
     
     //Part 1 animation
     //路径曲线

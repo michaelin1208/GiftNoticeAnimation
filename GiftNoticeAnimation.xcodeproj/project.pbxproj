@@ -134,18 +134,12 @@
 				73AC76A51CD0E827003E5FF5 /* QQ20160423-0.png */,
 				73AC76A61CD0E827003E5FF5 /* QQ20160423-1.png */,
 				73AC76A71CD0E827003E5FF5 /* QQ20160425-0.png */,
-				73AC76B41CD0E832003E5FF5 /* SuperGiftAnimation */,
+				73BFAC2C1CD2F746000E809A /* GiftAnimation */,
 				739A79C31CCE05C4001624F7 /* AppDelegate.h */,
 				739A79C41CCE05C4001624F7 /* AppDelegate.m */,
 				739A79C61CCE05C4001624F7 /* ViewController.h */,
 				739A79C71CCE05C4001624F7 /* ViewController.m */,
 				739A79C91CCE05C4001624F7 /* Main.storyboard */,
-				739A79F61CCE07C8001624F7 /* GiftNoticeView.h */,
-				739A79F31CCE07B1001624F7 /* GiftNoticeView.m */,
-				739A79F71CCE0BF7001624F7 /* GiftNoticeCellView.h */,
-				739A79F81CCE0C10001624F7 /* GiftNoticeCellView.m */,
-				73F4D3C91CCEFDD200AA23F8 /* ActiveGiftNotice.h */,
-				73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */,
 				73AC76A31CD0A854003E5FF5 /* Assets.xcassets */,
 				739A79CE1CCE05C4001624F7 /* LaunchScreen.storyboard */,
 				739A79D11CCE05C4001624F7 /* Info.plist */,
@@ -195,6 +189,20 @@
 				73BFAC2A1CD20EE6000E809A /* MessageView.m */,
 			);
 			name = SuperGiftAnimation;
+			sourceTree = "<group>";
+		};
+		73BFAC2C1CD2F746000E809A /* GiftAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				739A79F61CCE07C8001624F7 /* GiftNoticeView.h */,
+				739A79F31CCE07B1001624F7 /* GiftNoticeView.m */,
+				739A79F71CCE0BF7001624F7 /* GiftNoticeCellView.h */,
+				739A79F81CCE0C10001624F7 /* GiftNoticeCellView.m */,
+				73F4D3C91CCEFDD200AA23F8 /* ActiveGiftNotice.h */,
+				73F4D3CA1CCEFDEB00AA23F8 /* ActiveGiftNotice.m */,
+				73AC76B41CD0E832003E5FF5 /* SuperGiftAnimation */,
+			);
+			name = GiftAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

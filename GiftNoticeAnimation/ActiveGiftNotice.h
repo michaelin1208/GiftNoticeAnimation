@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GiftNoticeCellView.h"
+#import "BannerView.h"
 
 @interface ActiveGiftNotice : NSObject
 
@@ -17,11 +18,14 @@
 @property (strong, nonatomic) GiftNoticeCellView *allocatedCell;
 @property (strong, nonatomic) NSString *senderID;
 @property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *receiverID;
+@property (strong, nonatomic) NSString *receiverName;
 @property (strong, nonatomic) NSString *giftID;
 @property (strong, nonatomic) NSString *giftName;
 @property (nonatomic) long updateTime;
 
-- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName GiftID:(NSString *)giftID Name:(NSString *)giftName;
-- (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell;
+- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName ReceiverID:(NSString *)receiverID name:(NSString *)receiverName GiftID:(NSString *)giftID Name:(NSString *)giftName;
+- (void)increaseCount:(int)number withGiftNoticeCell: (GiftNoticeCellView *)cell;
+- (void)increaseCount:(int)number withBannerCell: (BannerView *)cell;
     
 @end

@@ -43,8 +43,7 @@
     Boolean isShown;
 }
 
-- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName GiftID:(NSString *)giftID Name:(NSString *)giftName
-{
+- (instancetype)initWithSenderID:(NSString *)senderID Name:(NSString *)senderName ReceiverID:(NSString *)receiverID name:(NSString *)receiverName GiftID:(NSString *)giftID Name:(NSString *)giftName{
     self = [super init];
     if (self) {
         currentCount = 0;
@@ -53,18 +52,30 @@
 //        _allocatedCell = cell;
         _senderID = senderID;
         _senderName = senderName;
+        _receiverID = receiverID;
+        _receiverName = receiverName;
         _giftID = giftID;
         _giftName = giftName;
     }
     return self;
 }
 
-- (void)increaseCount:(int)number withCell: (GiftNoticeCellView *)cell {
+- (void)increaseCount:(int)number withGiftNoticeCell: (GiftNoticeCellView *)cell {
     
     _updateTime = [[NSDate date] timeIntervalSince1970];
     targetCount = currentCount + number;
     
     [cell increaseCellWithCurrentCount:currentCount TargetCount:targetCount SenderID:_senderID Name:_senderName GiftID:_giftID Name:_giftName];
+    
+    currentCount = targetCount;
+}
+
+- (void)increaseCount:(int)number withBannerCell: (BannerView *)cell {
+    
+    _updateTime = [[NSDate date] timeIntervalSince1970];
+    targetCount = currentCount + number;
+    
+    [cell startAnimationWithSenderName:_senderName ReceiverName:_receiverName GiftName:_giftName Count:[NSString stringWithFormat:@"%d", targetCount] InReceiver:YES];
     
     currentCount = targetCount;
 }
