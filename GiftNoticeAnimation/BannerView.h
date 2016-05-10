@@ -17,6 +17,6 @@
 @property (strong, nonatomic) UILabel *countLabel;
 
 - (instancetype)initWithSenderName:(NSString *)senderName ReceiverName:(NSString *)reveiverName GiftName:(NSString *)GiftName;
-- (void)startAnimationWithSenderName:(NSString *)sName ReceiverName:(NSString *)rName GiftName:(NSString *)gName Count:(NSString *)c InReceiver:(Boolean)isInReceiver;
+- (void)startAnimationWithSenderName:(NSString *)sName IconPath:(NSString *) sIconPath ReceiverName:(NSString *)rName GiftName:(NSString *)gName ImagePath:(NSString *)gImagePath Count:(NSString *)c InReceiver:(Boolean)isInReceiver;
 
 @end

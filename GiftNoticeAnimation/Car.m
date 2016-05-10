@@ -126,7 +126,7 @@ const static CFTimeInterval runDuration = 2;
 
 - (void) animationDidStart:(CAAnimation *)anim
 {
-    NSLog(@"animation start");
+//    NSLog(@"animation start");
 }
 
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag

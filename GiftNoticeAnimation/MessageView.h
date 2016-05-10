@@ -12,13 +12,13 @@
 
 @property (strong, nonatomic) UIImageView *headImageView;
 @property (strong, nonatomic) UIImageView *giftImageView;
-@property (strong, nonatomic) UILabel *giftSenderLabel;
-@property (strong, nonatomic) UILabel *giftNameLabel;
+@property (strong, nonatomic) UILabel *senderLabel;
+@property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UILabel *countLabel;
 
 @property (nonatomic) int cellID;
 
-- (instancetype)initWithSenderName:(NSString *)senderName ReceiverName:(NSString *)reveiverName GiftName:(NSString *)GiftName;
-- (void)startAnimationWithSenderName:(NSString *)sName ReceiverName:(NSString *)rName Content:(NSString *)con;
+//- (instancetype)initWithSenderName:(NSString *)senderName ReceiverName:(NSString *)reveiverName GiftName:(NSString *)GiftName;
+- (void)startAnimationWithSenderName:(NSString *)sName IconPath:(NSString *) sIconPath ReceiverName:(NSString *)rName Content:(NSString *)con;
 
 @end

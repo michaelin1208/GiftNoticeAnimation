@@ -7,6 +7,7 @@
 //
 
 #import "MessageView.h"
+//#import "UIImageView+WebCache.h"
 #define kBannerViewLabelWidth 120
 #define kBannerViewLabelHeight 13
 
@@ -22,13 +23,15 @@
 #define kGiftImageViewWidth 40
 #define kGiftImageViewHeight kGiftImageViewWidth
 
-#define kGiftMargin 5
+#define kMargin 6
 
 #define kCLDefaultHeadImage [UIImage imageNamed:@"Defaulthead"]
 
 #define kShortStayDuration 1
 #define kLongStayDuration 2
-#define kMoveDuration 3
+#define kMoveDuration 4
+
+#define kChatNickNameColor [UIColor colorWithRed:255.0/255.0 green:175/255.0 blue:74/255.0 alpha:1]
 
 @interface MessageView ()
 
@@ -37,6 +40,7 @@
 
 @implementation MessageView {
     NSString *senderName;
+    NSString *senderIconPath;
     NSString *receiverName;
     NSString *giftName;
     NSString *content;
@@ -54,16 +58,23 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
-        self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
-        self.layer.anchorPoint = CGPointMake(0.5, 0.5);
+//        UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
+//        self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
         
-        self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 4, kBannerViewLabelWidth, kBannerViewLabelHeight)];
-        self.giftSenderLabel.textColor = [UIColor yellowColor];
-        self.giftSenderLabel.font = [UIFont boldSystemFontOfSize:12];
-        self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 17, kBannerViewLabelWidth, kBannerViewLabelHeight)];
-        self.giftNameLabel.textColor = [UIColor yellowColor];
-        self.giftNameLabel.font = [UIFont boldSystemFontOfSize:12];
+        //消息窗口的页面格式
+        [self setBackgroundColor:[UIColor colorWithRed: 0 green:0 blue:0 alpha:100]];
+        self.senderLabel.textColor = kChatNickNameColor;
+        self.contentLabel.textColor = [UIColor whiteColor];
+        self.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        self.layer.cornerRadius = self.frame.size.height/2;
+        self.layer.masksToBounds = YES;
+        
+        self.senderLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 4, kBannerViewLabelWidth, kBannerViewLabelHeight)];
+        self.senderLabel.textColor = [UIColor yellowColor];
+        self.senderLabel.font = [UIFont boldSystemFontOfSize:12];
+        self.contentLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 17, kBannerViewLabelWidth, kBannerViewLabelHeight)];
+        self.contentLabel.textColor = [UIColor yellowColor];
+        self.contentLabel.font = [UIFont boldSystemFontOfSize:12];
         self.countLabel = [[UILabel alloc] initWithFrame: CGRectMake(210, 0, kCountLabelWidth, kCountLabelHeight)];
         self.countLabel.layer.anchorPoint = CGPointMake(0.5, 0.5);
         self.countLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -79,12 +90,12 @@
         self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview: self.headImageView];
         
-//        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
+//        self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.senderLabel.frame.origin.x+self.senderLabel.frame.size.width + kMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
 //        [self.giftImageView setImage:kCLDefaultHeadImage];
         
 //        [self addSubview: self.giftImageView];
-        [self addSubview: self.giftSenderLabel];
-        [self addSubview: self.giftNameLabel];
+        [self addSubview: self.senderLabel];
+        [self addSubview: self.contentLabel];
         [self addSubview: self.countLabel];
         
         
@@ -93,22 +104,6 @@
 }
 
 - (void)initAnimation{
-    startPoint = CGPointMake(self.superview.frame.size.width + self.frame.size.width/2, self.layer.position.y);
-//    stayPoint = CGPointMake(self.superview.frame.size.width/2, self.frame.size.height/2 + 20);
-    endPoint = CGPointMake(-self.frame.size.width + self.frame.size.width/2, self.layer.position.y);
-    
-    //Part 1 animation
-    //路径曲线
-    UIBezierPath *moveInPath = [UIBezierPath bezierPath];
-    [moveInPath moveToPoint:startPoint];
-    [moveInPath addLineToPoint:endPoint];
-    
-    //关键帧
-    moveInAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    moveInAnimation.path = moveInPath.CGPath;
-    moveInAnimation.removedOnCompletion = NO;
-    moveInAnimation.duration = kMoveDuration;
-    moveInAnimation.delegate = self;
     
     
 //    //Part 2 animation
@@ -125,27 +120,61 @@
 //    moveOutAnimation.delegate = self;
 }
 
-- (void)startAnimationWithSenderName:(NSString *)sName ReceiverName:(NSString *)rName Content:(NSString *)con{
+- (void)startAnimationWithSenderName:(NSString *)sName IconPath:(NSString *) sIconPath ReceiverName:(NSString *)rName Content:(NSString *)con{
     
-    if (moveInAnimation == nil) {
-        [self initAnimation];
-    }
+//    if (moveInAnimation == nil) {
+//        [self initAnimation];
+//    }
     
     senderName = sName;
+    senderIconPath = sIconPath;
     receiverName = rName;
     content = con;
 //    giftName = gName;
 //    count = c;
     
-    self.giftSenderLabel.text = senderName;
-    self.giftNameLabel.text = content;
-//    self.countLabel.text = [NSString stringWithFormat:@"X %@", count];
+    self.senderLabel.text = senderName;
+    self.contentLabel.text = content;
+    //    self.countLabel.text = [NSString stringWithFormat:@"X %@", count];
     
-//    if (isInReceiver) {
-//        stayDuration = kLongStayDuration;
-//    }else{
-//        stayDuration = kShortStayDuration;
-//    }
+    
+    
+    if ([senderIconPath rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location == NSNotFound)
+    {
+        senderIconPath = [@"http://" stringByAppendingString:senderIconPath];
+    }
+    
+//    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:senderIconPath] placeholderImage:kCLDefaultHeadImage];
+    [self.headImageView setImage:kCLDefaultHeadImage];
+    
+    //set custom animation
+    [self.contentLabel sizeToFit];
+    int newWidth = self.contentLabel.frame.size.width+self.contentLabel.frame.origin.x+kMargin;
+    if (newWidth < self.senderLabel.frame.size.width+self.contentLabel.frame.origin.x+kMargin) {
+        newWidth = self.senderLabel.frame.size.width+self.contentLabel.frame.origin.x+kMargin;
+    }
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, newWidth, self.frame.size.height);
+    
+    startPoint = CGPointMake(self.superview.frame.size.width + self.frame.size.width/2, self.layer.position.y);
+    //    stayPoint = CGPointMake(self.superview.frame.size.width/2, self.frame.size.height/2 + 20);
+    endPoint = CGPointMake(-self.frame.size.width + self.frame.size.width/2, self.layer.position.y);
+    
+    startPoint = CGPointMake(self.superview.frame.size.width + self.frame.size.width/2, self.layer.position.y);
+    //    stayPoint = CGPointMake(self.superview.frame.size.width/2, self.frame.size.height/2 + 20);
+    endPoint = CGPointMake(-self.frame.size.width + self.frame.size.width/2, self.layer.position.y);
+    
+    //Part 1 animation
+    //路径曲线
+    UIBezierPath *moveInPath = [UIBezierPath bezierPath];
+    [moveInPath moveToPoint:startPoint];
+    [moveInPath addLineToPoint:endPoint];
+    
+    //关键帧
+    moveInAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    moveInAnimation.path = moveInPath.CGPath;
+    moveInAnimation.removedOnCompletion = NO;
+    moveInAnimation.duration = kMoveDuration;
+    moveInAnimation.delegate = self;
     
     [self startMoveIn];
 }
@@ -165,7 +194,7 @@
 
 - (void) animationDidStart:(CAAnimation *)anim
 {
-    NSLog(@"animation start");
+//    NSLog(@"animation start");
 }
 
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag

@@ -11,24 +11,28 @@
 
 #import "FireworkAnimation.h"
 #import "Car.h"
+//#import "UIImageView+WebCache.h"
 
 #define kGiftNoticeCellLabelWidth 120
 #define kGiftNoticeCellLabelHeight 13
 #define kGiftMargin 5
 #define kCountLabelWidth 30
 #define kCountLabelHeight kCountLabelWidth
-#define kRunDuration 0.4
+#define kRunDuration 0.3
 #define kStayDuration 0.4
 
+
+#define kPrizeScaleValue 0.83
 
 #define kNormalGiftHeadBtnWidth 35
 #define kNormalGiftHeadBtnHeight kNormalGiftHeadBtnWidth
 
-#define kGiftImageViewWidth 40
+#define kGiftImageViewWidth 50
 #define kGiftImageViewHeight kGiftImageViewWidth
 
 
 #define kCLDefaultHeadImage [UIImage imageNamed:@"Defaulthead"]
+#define kChatNickNameColor [UIColor colorWithRed:255.0/255.0 green:175/255.0 blue:74/255.0 alpha:1]
 
 @interface GiftNoticeCellView ()
 
@@ -39,6 +43,7 @@
     UIView* backgroundView;
     CAAnimationGroup *appearAnimation;
     CAAnimationGroup *disappearAnimation;
+    CABasicAnimation *lightAnimation;
     CABasicAnimation *increaseAnimation1;
     CABasicAnimation *increaseAnimation2;
     CABasicAnimation *increaseAnimation3;
@@ -70,13 +75,15 @@
         _isDisappear = YES;
         _isUsable = YES;
         _isUsed = NO;
+        
+        //页面格式样式在这之后设置
         UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
         self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
-        self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 4, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
-        self.giftSenderLabel.textColor = [UIColor yellowColor];
+        self.giftSenderLabel = [[UILabel alloc] initWithFrame: CGRectMake(42, 4, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
+        self.giftSenderLabel.textColor = kChatNickNameColor;
         self.giftSenderLabel.font = [UIFont boldSystemFontOfSize:12];
-        self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(40, 17, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
-        self.giftNameLabel.textColor = [UIColor yellowColor];
+        self.giftNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(42, 17, kGiftNoticeCellLabelWidth, kGiftNoticeCellLabelHeight)];
+        self.giftNameLabel.textColor = [UIColor whiteColor];
         self.giftNameLabel.font = [UIFont boldSystemFontOfSize:12];
         self.countLabel = [[UILabel alloc] initWithFrame: CGRectMake(210, 0, kCountLabelWidth, kCountLabelHeight)];
         self.countLabel.layer.anchorPoint = CGPointMake(0.5, 0.5);
@@ -97,8 +104,25 @@
         self.headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview: self.headImageView];
         
+        
+        self.lightImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"light"]];
+        float tempLightWidth = self.lightImageView.frame.size.width * kPrizeScaleValue;
+        float tempLightHeight = self.lightImageView.frame.size.height * kPrizeScaleValue;
+        self.lightImageView.frame = CGRectMake(self.headImageView.frame.size.width/2 - tempLightWidth/2, self.headImageView.frame.size.height/2 - tempLightHeight/2, tempLightWidth, tempLightHeight);
+        [self addSubview:self.lightImageView];
+        self.lightImageView.hidden = YES;
+        
+        self.prizeImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"500"]];
+        float tempPrizeWidth = self.prizeImageView.frame.size.width * kPrizeScaleValue;
+        float tempPrizeHeight = self.prizeImageView.frame.size.height * kPrizeScaleValue;
+        self.prizeImageView.frame = CGRectMake(self.headImageView.frame.size.width/2 - tempPrizeWidth/2, self.headImageView.frame.size.height/2 - tempPrizeHeight/2, tempPrizeWidth, tempPrizeHeight);
+        [self addSubview:self.prizeImageView];
+        self.prizeImageView.hidden = YES;
+        
+        
         self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
         [self.giftImageView setImage:kCLDefaultHeadImage];
+        [self.giftImageView setContentMode:UIViewContentModeScaleAspectFit];
         [self addSubview: self.giftImageView];
         
         
@@ -128,14 +152,15 @@
     return self;
 }
 
+//初始化动画
 - (void)initAnimations{
     
     
 //    self.layer.anchorPoint = CGPointMake(0, 0);
     
     startPoint = CGPointMake(-self.frame.size.width + self.frame.size.width / 2, self.frame.origin.y + self.frame.size.height / 2);
-    stayPoint = CGPointMake(self.frame.origin.x + self.frame.size.width / 2, self.frame.origin.y + self.frame.size.height / 2);
-    endPoint = CGPointMake(-self.frame.origin.x + self.frame.size.width / 2, self.frame.origin.y - 30 +self.frame.size.height / 2);
+    stayPoint = CGPointMake(10 + self.frame.origin.x + self.frame.size.width / 2, self.frame.origin.y + self.frame.size.height / 2);
+    endPoint = CGPointMake(10 + self.frame.origin.x + self.frame.size.width / 2, self.frame.origin.y - 30 +self.frame.size.height / 2);
     
     //Move in animation
     //路径曲线
@@ -221,32 +246,69 @@
     increaseAnimation3.delegate = self;
     
     
+    lightAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    lightAnimation.duration = 2; // 持续时间
+    lightAnimation.repeatCount = 0; // 重复次数
+    lightAnimation.fromValue = [NSNumber numberWithFloat:0.0]; // 起始角度
+    lightAnimation.toValue = [NSNumber numberWithFloat:2 * M_PI];
+    
 }
 
-- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount SenderID: (NSString *)senderID Name: (NSString *)senderName GiftID:(NSString *)giftID Name: (NSString *)giftName {
+//显示中奖500倍动画
+- (void)showPrizeAnimation{
+    self.prizeImageView.hidden = NO;
+    self.lightImageView.hidden = NO;
+    [self.lightImageView.layer addAnimation:lightAnimation forKey:@"lightAnimation"];
+//    self start
+}
+
+//隐藏中奖500倍动画
+- (void)hiddenPrizeAnimation{
+    self.prizeImageView.hidden = YES;
+    self.lightImageView.hidden = YES;
+    [self.lightImageView.layer removeAllAnimations];
+}
+
+//增加礼物计数 考虑是否在增加数量的动画中，增加动画中就只增加最终数字，不开始动画
+- (void)increaseCellWithCurrentCount: (int)cCount TargetCount: (int)tCount SenderID: (NSString *)senderID Name: (NSString *)senderName IconPath: (NSString *)senderIconPath GiftID:(NSString *)giftID Name: (NSString *)giftName ImagePath: (NSString *)giftImagePath{
     
-    NSLog(@"SENDER %@ GIFT %@ COUNT %d", senderID, giftID, tCount);
+//    NSLog(@"SENDER %@ GIFT %@ COUNT %d", senderID, giftID, tCount);
 //    currentTimeInterval = [[NSDate date] timeIntervalSince1970];
     if([senderID isEqualToString:_senderID] && [giftID isEqualToString:_giftID] && !_isDisappear){
         if (_isUsable) {
-            NSLog(@"AAAAAAAAAAAAAAA");
+//            NSLog(@"AAAAAAAAAAAAAAA");
             currentCount = cCount;
             targetCount = tCount;
             [self increaseAnimation];
         }else{
-            NSLog(@"BBBBBBBBBBBBBBB");
+//            NSLog(@"BBBBBBBBBBBBBBB");
             targetCount = tCount;
         }
     }else{
-        NSLog(@"CCCCCCCCCCCCCCCC");
+//        NSLog(@"CCCCCCCCCCCCCCCC");
         _senderID = senderID;
         _senderName = senderName;
+        _senderIconPath = senderIconPath;
         _giftID = giftID;
         _giftName = giftName;
+        _giftImagePath = giftImagePath;
         currentCount = cCount;
         targetCount = tCount;
-        self.giftSenderLabel.text = [NSString stringWithFormat:@"%d %@", _cellID, _senderName];
+        self.giftSenderLabel.text = _senderName;
         self.giftNameLabel.text = _giftName;
+        
+        if ([_senderIconPath rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location == NSNotFound)
+        {
+            _senderIconPath = [@"http://" stringByAppendingString:_senderIconPath];
+        }
+        
+//        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_senderIconPath] placeholderImage:kCLDefaultHeadImage];
+//        
+//        [self.giftImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[UserInfoManager getInstance].baseConfig.itemPicRootUrl,_giftImagePath]]];
+        
+        [self.headImageView setImage: kCLDefaultHeadImage];
+        [self.giftImageView setImage: kCLDefaultHeadImage];
+        
         [self appearAnimation];
     }
     
@@ -267,19 +329,21 @@
         [self increaseAnimation];
     }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation1"]) {
         //increaseAnimation1 finished
-        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+//        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
         [self.countLabel.layer addAnimation:increaseAnimation2 forKey:@"increaseAnimation2"];
     }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation2"]) {
         //increaseAnimation2 finished
-        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+//        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
         [self.countLabel.layer addAnimation:increaseAnimation3 forKey:@"increaseAnimation3"];
     }else if (anim == [self.countLabel.layer animationForKey:@"increaseAnimation3"]) {
         //increaseAnimation3 finished
-        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+//        NSLog(@"cellid %d sleep %d", _cellID, currentCount);
         [self increaseAnimation];
 //                [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
     }else if (anim == [self.layer animationForKey:@"disappearAnimation"]) {
         //disappearAnimation finished
+        
+        [self hiddenPrizeAnimation];
 
         self.hidden = YES;
         self.countLabel.hidden = YES;
@@ -298,7 +362,7 @@
 
 - (void) didStopIncreaseAnimation{
     //increaseAnimation finished
-    NSLog(@"cellid %d sleep %d", _cellID, currentCount);
+//    NSLog(@"cellid %d sleep %d", _cellID, currentCount);
     [NSTimer scheduledTimerWithTimeInterval:kStayDuration target:self selector:@selector(increaseAnimation) userInfo:nil repeats:NO];
 
 }
@@ -315,6 +379,7 @@
     
 }
 
+//普通礼物界面出现动画
 - (void) appearAnimation{
     _isUsable = NO;
     animationType = 0;
@@ -329,10 +394,11 @@
 //    [self checkGiftType:_giftName];
 }
 
+//普通礼物礼物数字增加动画
 - (void) increaseAnimation{
-    NSLog(@"cellid %d wake %d", _cellID, currentCount);
+//    NSLog(@"cellid %d wake %d", _cellID, currentCount);
     if (currentCount < targetCount) {
-        NSLog(@"increaseAnimation in Cell %d ",_cellID);
+//        NSLog(@"increaseAnimation in Cell %d ",_cellID);
         _isUsable = NO;
         animationType = 1;
         currentCount++;
@@ -344,6 +410,10 @@
         [self.countLabel.layer removeAllAnimations];
         [self.countLabel.layer addAnimation:increaseAnimation1 forKey:@"increaseAnimation1"];
         firstStep = NO;
+        
+        
+//        [self showPrizeAnimation];
+        
     }else{
 //        waitingTimeInterval = [[NSDate date] timeIntervalSince1970]; // record
         _isUsable = YES;
@@ -355,7 +425,7 @@
 }
 
 
-
+//礼物窗口消失动画
 - (void) disappearAnimation{
     if (_isUsable) {
         _isUsable = NO;
@@ -370,6 +440,7 @@
         _canDisappear = NO;
     }
 }
+
 
 - (void)checkGiftType:(NSString *)gift{
     if ([gift isEqualToString:@"firework"]) {
@@ -388,7 +459,7 @@
     waitingCount--;
     if (waitingCount <= 0) {
         if (_isUsable) {
-            NSLog(@"send IWantToDisappear");
+//            NSLog(@"send IWantToDisappear");
             _canDisappear = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"IWantToDisappear" object:[NSNumber numberWithInt:_cellID]];
         }

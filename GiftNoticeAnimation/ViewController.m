@@ -34,28 +34,28 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)giftAG1tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" ReceiverID:@"111" Name:@"R111" GiftID:@"1111" Name:@"G1111" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" IconPath:@"path1" ReceiverID:@"111" Name:@"R111" GiftID:@"1111" Name:@"G1111" ImagePath:@"path2" Count:@"1" SuperGift:NO];
 }
 - (IBAction)giftAG2tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" ReceiverID:@"111" Name:@"R111" GiftID:@"2222" Name:@"G2222" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" IconPath:@"path1" ReceiverID:@"111" Name:@"R111" GiftID:@"2222" Name:@"G2222" ImagePath:@"path2" Count:@"1" SuperGift:NO];
 }
 - (IBAction)giftBG1tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" ReceiverID:@"111" Name:@"R111" GiftID:@"1111" Name:@"G1111" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" IconPath:@"path1" ReceiverID:@"111" Name:@"R111" GiftID:@"1111" Name:@"G1111" ImagePath:@"path2" Count:@"1" SuperGift:NO];
 }
 - (IBAction)giftBG2tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" ReceiverID:@"111" Name:@"R111" GiftID:@"2222" Name:@"G2222" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" IconPath:@"path1" ReceiverID:@"111" Name:@"R111" GiftID:@"2222" Name:@"G2222" ImagePath:@"path2" Count:@"1" SuperGift:NO];
 }
 - (IBAction)giftASG1tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" ReceiverID:@"111" Name:@"R111" GiftID:@"3333" Name:@"G3333" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" IconPath:@"path1" ReceiverID:@"111" Name:@"R111" GiftID:@"1111" Name:@"SG1111" ImagePath:@"path2" Count:@"1" SuperGift:YES];
 }
 - (IBAction)giftASG2tnTouched:(id)sender {
-    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"22" Name:@"S22" ReceiverID:@"111" Name:@"R111" GiftID:@"4444" Name:@"G4444" Count:@"1"];
+    [giftNoticeView insertWaitingGiftNoticesWithSenderID:@"11" Name:@"S11" IconPath:@"path1" ReceiverID:@"222" Name:@"R222" GiftID:@"1111" Name:@"SG1111" ImagePath:@"path2" Count:@"1" SuperGift:YES];
 }
 
 - (IBAction)giftBSG1tnTouched:(id)sender {
-    [giftNoticeView insertWaitingMessagesWithSenderID:@"33" Name:@"S33" ReceiverID:@"333" Name:@"R333"Content:@"CCCCCCC11111"];
+    [giftNoticeView insertWaitingMessagesWithSenderID:@"44" Name:@"S44" IconPath:@"PATH1" ReceiverID:@"1111" Name:@"R1111" Content:@"CCCCCCCCCCCCCCCCCCCCC444444444444444"];
 }
 - (IBAction)giftBSG2tnTouched:(id)sender {
-    [giftNoticeView insertWaitingMessagesWithSenderID:@"44" Name:@"S44" ReceiverID:@"555" Name:@"R555"Content:@"CCCCCCC22222"];
+    [giftNoticeView insertWaitingMessagesWithSenderID:@"55" Name:@"S55" IconPath:@"PATH2" ReceiverID:@"2222" Name:@"R2222" Content:@"CCCCCCCCCCCCCCCCCCCCC555555555555555555555555555555"];
 }
 @end

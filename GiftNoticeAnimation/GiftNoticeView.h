@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GiftNoticeView : UIView
-- (void)insertWaitingMessagesWithSenderID:(NSString *)senderID Name: (NSString *)senderName ReceiverID:(NSString *)receiverID Name: (NSString *)receiverName Content:(NSString *) content;
-- (void)insertWaitingGiftNoticesWithSenderID:(NSString *)senderID Name: (NSString *)senderName ReceiverID:(NSString *)receiverID Name: (NSString *)receiverName GiftID: (NSString *)giftID Name:(NSString *)giftName Count:(NSString *)count;
+- (void)insertWaitingMessagesWithSenderID:(NSString *)senderID Name: (NSString *)senderName IconPath: (NSString *)senderIconPath ReceiverID:(NSString *)receiverID Name: (NSString *)receiverName Content:(NSString *) content;
+- (void)insertWaitingGiftNoticesWithSenderID:(NSString *)senderID Name: (NSString *)senderName IconPath: (NSString *)senderIconPath ReceiverID:(NSString *)receiverID Name: (NSString *)receiverName GiftID: (NSString *)giftID Name:(NSString *)giftName ImagePath: (NSString *)giftImagePath Count:(NSString *)count SuperGift: (Boolean)isSuperGift;
 @end

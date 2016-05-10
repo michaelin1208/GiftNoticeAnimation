@@ -7,6 +7,8 @@
 //
 
 #import "BannerView.h"
+//#import "UserInfoManager.h"
+//#import "UIImageView+WebCache.h"
 #define kBannerViewLabelWidth 120
 #define kBannerViewLabelHeight 13
 
@@ -19,16 +21,16 @@
 #define kBannerViewGiftImageViewWidth 40
 #define kBannerViewGiftImageViewHeight kBannerViewGiftImageViewWidth
 
-#define kGiftImageViewWidth 40
+#define kGiftImageViewWidth 60
 #define kGiftImageViewHeight kGiftImageViewWidth
 
 #define kGiftMargin 5
 
 #define kCLDefaultHeadImage [UIImage imageNamed:@"Defaulthead"]
 
-#define kShortStayDuration 1
-#define kLongStayDuration 2
-#define kMoveDuration 1
+#define kShortStayDuration 0.5
+#define kLongStayDuration 1
+#define kMoveDuration 2
 
 @interface BannerView ()
 
@@ -37,8 +39,10 @@
 
 @implementation BannerView {
     NSString *senderName;
+    NSString *senderIconPath;
     NSString *receiverName;
     NSString *giftName;
+    NSString *giftImagePath;
     NSString *count;
     int stayDuration;
     
@@ -54,6 +58,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        //上方超级礼物的页面样式
         UIImage * bgImage = [UIImage imageNamed:@"chat_gift_animate_bg"];
         self.backgroundColor = [UIColor colorWithPatternImage:bgImage];
         self.layer.anchorPoint = CGPointMake(0.5, 0.5);
@@ -81,6 +87,7 @@
         
         self.giftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.giftSenderLabel.frame.origin.x+self.giftSenderLabel.frame.size.width + kGiftMargin, self.frame.size.height - kGiftImageViewHeight, kGiftImageViewWidth, kGiftImageViewHeight)];
         [self.giftImageView setImage:kCLDefaultHeadImage];
+        [self.giftImageView setContentMode:UIViewContentModeScaleAspectFit];
         
         [self addSubview: self.giftImageView];
         [self addSubview: self.giftSenderLabel];
@@ -125,21 +132,35 @@
     moveOutAnimation.delegate = self;
 }
 
-- (void)startAnimationWithSenderName:(NSString *)sName ReceiverName:(NSString *)rName GiftName:(NSString *)gName Count:(NSString *)c InReceiver:(Boolean)isInReceiver{
+//开始移动入场动画，isInReceiver来确认是否为在自己的直播间，是的话停留时间更长
+- (void)startAnimationWithSenderName:(NSString *)sName IconPath:(NSString *) sIconPath ReceiverName:(NSString *)rName GiftName:(NSString *)gName ImagePath:(NSString *)gImagePath Count:(NSString *)c InReceiver:(Boolean)isInReceiver{
     
     if (moveInAnimation == nil || moveOutAnimation == nil) {
         [self initAnimation];
     }
     
     senderName = sName;
+    senderIconPath = sIconPath;
     receiverName = rName;
     giftName = gName;
+    giftImagePath = gImagePath;
     count = c;
     
     self.giftSenderLabel.text = senderName;
     self.giftNameLabel.text = [NSString stringWithFormat:@"送给 %@ %@", receiverName, giftName];
     self.countLabel.text = [NSString stringWithFormat:@"X %@", count];
     [self.countLabel sizeToFit];
+    
+    
+    if ([senderIconPath rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location == NSNotFound)
+    {
+        senderIconPath = [@"http://" stringByAppendingString:senderIconPath];
+    }
+    
+//    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:senderIconPath] placeholderImage:kCLDefaultHeadImage];
+//    [self.giftImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[UserInfoManager getInstance].baseConfig.itemPicRootUrl,giftImagePath]]];
+    [self.headImageView setImage:kCLDefaultHeadImage];
+    [self.giftImageView setImage:kCLDefaultHeadImage];
     
     if (isInReceiver) {
         stayDuration = kLongStayDuration;
@@ -165,7 +186,7 @@
 
 - (void) animationDidStart:(CAAnimation *)anim
 {
-    NSLog(@"animation start");
+//    NSLog(@"animation start");
 }
 
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag

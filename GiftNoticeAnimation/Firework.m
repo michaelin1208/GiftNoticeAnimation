@@ -103,13 +103,13 @@
 
 - (void) animationDidStart:(CAAnimation *)anim
 {
-    NSLog(@"animation start");
+//    NSLog(@"animation start");
 }
 
 // 烟花的发射到固定点后 再调用爆炸的动画
 - (void) animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    NSLog(@"animation stop");
+//    NSLog(@"animation stop");
     if (anim == [_sublayer animationForKey:@"shoot"]) {
         [_sublayer removeFromSuperlayer];
         
@@ -128,7 +128,7 @@
 
     }else if (anim == [_sublayer2 animationForKey:@"explosion"]){
         [_sublayer2 removeFromSuperlayer];
-        NSLog(@"_sublayer2 remove");
+//        NSLog(@"_sublayer2 remove");
     }
     
     
